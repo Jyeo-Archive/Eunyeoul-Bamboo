@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<head>
+  <title>은여울중학교 대나무숲</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+  <style>
+    body {
+      color: black;
+      font-size: 120%;
+      background: linear-gradient(#97c1b2, #e6d887);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      text-align: center;
+      font-family: '나눔스퀘어';
+    }
+    .main {
+      position: relative;
+      top: 2rem;
+    }
+    h1 {
+      /* color: white; */
+      font-size: 200%;
+    }
+    p {
+      font-size: 100%;
+    }
+    textarea {
+      width: 90%;
+      height: 50%;
+      padding: 2%;
+      resize: none;
+      font-family: '나눔스퀘어';
+      font-size: 120%;
+      border: none;     
+      border-radius: 8px;
+      opacity: initial;
+    }
+    button {
+      margin-bottom: 10%;
+      font-size: 110%;
+      padding: 5px;
+      border: none;
+      border-radius: 8px;
+    }
+  </style>
+  <div class="main">
+  <div class="title">
+    <h1>은여울중학교 대나무숲에 제보하세요</h1>
+    <p>제보자는 100% 익명으로, <strong>관리자 역시 알 수 없습니다.</strong><br>
+    <a href="#">페이지 안내</a>와 <a href="#">이용약관</a>, <a href="/terms" target="_blank">개인정보 처리방침</a>을 확인하세요.<br>
+    관리자가 아닌 <strong>서버측 프로그램이 자동</strong>으로 제보를 업로드합니다.<br>
+    업로드까지는 10초에서 최대 1~3분이 걸리며, 이는 서버 상황에 따라 달라질 수 있습니다.</p>
+  </div>
+  <div class="write">
+    <textarea id="article" rows="10"></textarea>
+    <p>아래 <strong>제보하기</strong> 버튼을 클릭하여 제보를 업로드하면 <a href="#">이용약관</a>에 동의하는 것으로 간주합니다.</p>
+    <button onclick="sendMessage()">제보하기</button>
+  </div>
+  <script>
+    function sendMessage(){
+      message = document.getElementById('article').value;
+      location.href = '/write?message=' + message;
+    }
+  </script>
+  <!--게시글 업로드 성공 시-->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <script>alert('게시글 업로드에 성공했습니다!')</script> <!--성공 메세지 출력-->
+    {% endif %}
+  {% endwith %}
+  </div>
+</body>
